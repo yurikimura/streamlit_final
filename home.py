@@ -55,7 +55,16 @@ reconstructed_model = load_model("vtuber_reco.h5")
 
 # title
 st.title('Welcome to Speaker Annotator!')
-st.write('This model was trained on __ data and tells you who is speaking when.')
+#st.subheader('Click on one of the tabs to see it in action!')
+
+# centers image
+col1, col2, col3 = st.columns([1,6,1])
+with col1:
+    st.write("")
+with col2:
+    st.image('speaker_images/conversation_home.webp')
+with col3:
+    st.write("")
     
 # create a sidebar for uploading wav files
 predfile = st.sidebar.file_uploader("Upload your audio file below ⬇️", type=['wav'])

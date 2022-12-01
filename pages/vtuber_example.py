@@ -1,4 +1,6 @@
-# This file contains contents needed to run out app through streamlit
+############################################################
+# This program allows you to run the VTuber example for our Streamlit app
+############################################################
 
 # imports
 import streamlit as st
@@ -49,7 +51,7 @@ reconstructed_model = load_model("vtuber_reco.h5")
 
 # title
 st.title('Speaker Annotation with 5 VTubers')
-st.write('This model was trained on 5 VTubers and is now able to identify them.')
+st.write('This model was trained on 5 VTubers and is now able to identify them in a conversation.')
 col1, col2, col3 = st.columns([1,6,1])
 with col1:
     st.write("")
@@ -59,7 +61,7 @@ with col3:
     st.write("")
     
 # create a sidebar for uploading wav files
-predfile = st.sidebar.file_uploader("Upload your audio file below ⬇️", type=['wav'])
+uploaded_audio = st.sidebar.file_uploader("Upload your audio file below ⬇️", type=['wav'])
 
 # prepare audio for feeding into the model
 def preprocess(audio,threshold,sample_length,sample_rate):
@@ -208,7 +210,7 @@ def predict_timestamp_and_remove(num_cut):
             
             # displays image in sidebar
             with image_placeholder.container(): 
-                st.image(target_images[predicted_speaker], width = 200)
+                st.image(target_images[predicted_speaker], width = 300)
                 st.subheader(f'{speaker}: {timestamp}')
             
             # creates df
@@ -249,7 +251,7 @@ def predict_timestamp_and_remove(num_cut):
                 
                 # displays image in sidebar
                 with image_placeholder.container(): 
-                    st.image(target_images[predicted_speaker], width = 200)
+                    st.image(target_images[predicted_speaker], width = 300)
                     st.subheader(f'{speaker}: {timestamp}')
                 
                 df = pd.DataFrame({'speaker': speaker_column, 
@@ -289,7 +291,7 @@ def predict_timestamp_and_remove(num_cut):
                 
                 # displays image in sidebar
                 with image_placeholder.container(): 
-                    st.image(target_images[predicted_speaker], width = 200)
+                    st.image(target_images[predicted_speaker], width = 300)
                     st.subheader(f'{speaker}: {timestamp}')
                 
                 # creates data frame
@@ -327,6 +329,18 @@ def predict_timestamp_and_remove(num_cut):
         mime = 'text/csv')
 
 try:
+    # Top of page
+    st.write('Hit the button below to see how it works: ')
+    
+    # If the user clicks this button, the preloaded file will run
+    if st.button('run example', type = 'primary'): 
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        audio_dir = os.path.join(current_dir, 'example_audio')
+        predfile = os.path.join(audio_dir, 'vtuber_short.wav')
+        
+    # If the user doesn't click the button, then they upload an audio file to run
+    else: 
+        predfile = uploaded_audio
     wr = wave.open(predfile, 'r')
     n = target_cropper(wr, 3)
     predict_timestamp_and_remove(n)
