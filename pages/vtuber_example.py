@@ -31,7 +31,7 @@ batch_size = 16
 epoch = 50
 time = 1
 
-vtuber_url = "https://interview33-gxqshhfzea-an.a.run.app/getPrediction"
+vtuber_url = "https://interview3-gxqshhfzea-an.a.run.app/getPrediction"
 
 # names of speakers
 target_label = {0: "Calliope",
@@ -46,9 +46,6 @@ target_images = {0: 'vtuber_images/calliope.webp',
                  2: 'vtuber_images/watson.webp',
                  3: 'vtuber_images/gura.webp',
                  4: 'vtuber_images/kiara.webp'}
-
-# loading model
-reconstructed_model = load_model("vtuber_reco.h5")
 
 # title
 st.title('Speaker Annotation with 5 VTubers')

@@ -57,7 +57,7 @@ with col2:
 with col3:
     st.write("")
 
-interview_url = "https://interview33-gxqshhfzea-an.a.run.app/getIntervewerPrediction"
+interview_url = "https://interview3-gxqshhfzea-an.a.run.app/getIntervewerPrediction"
 time = 1
 
 
