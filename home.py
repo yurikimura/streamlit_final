@@ -220,7 +220,7 @@ def predict_timestamp_and_remove(num_cut):
             # overwrites container
             with df_placeholder.container(): 
                 # Displays df
-                st.dataframe(df)
+                st.dataframe(df.tail(5))
 
             
         # If the speaker changes
@@ -260,7 +260,7 @@ def predict_timestamp_and_remove(num_cut):
                 # overwrites current container
                 with df_placeholder.container(): 
                     # Displays df
-                    st.dataframe(df)
+                    st.dataframe(df.tail(5))
 
                 # updates information
                 last_speaker = predicted_speaker
@@ -301,7 +301,7 @@ def predict_timestamp_and_remove(num_cut):
                 # overwrites current container
                 with df_placeholder.container():
                     # Displays df
-                    st.dataframe(df)
+                    st.dataframe(df.tail(5))
                 
                 # updates information
                 last_speaker = predicted_speaker

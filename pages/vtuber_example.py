@@ -18,8 +18,6 @@ from datetime import timedelta
 import io
 from scipy.io import wavfile
 
-
-
 from speech_to_text import *
 
 # ignores any warnings that pop up when running file
@@ -52,6 +50,13 @@ reconstructed_model = load_model("vtuber_reco.h5")
 # title
 st.title('Speaker Annotation with 5 VTubers')
 st.write('This model was trained on 5 VTubers and is now able to identify them.')
+col1, col2, col3 = st.columns([1,6,1])
+with col1:
+    st.write("")
+with col2:
+    st.image('vtuber_images/everyone.jpeg')
+with col3:
+    st.write("")
     
 # create a sidebar for uploading wav files
 predfile = st.sidebar.file_uploader("Upload your audio file below ⬇️", type=['wav'])
@@ -203,8 +208,8 @@ def predict_timestamp_and_remove(num_cut):
             
             # displays image in sidebar
             with image_placeholder.container(): 
-                st.image(target_images[predicted_speaker], width = 100)
-                st.write(speaker)
+                st.image(target_images[predicted_speaker], width = 200)
+                st.subheader(f'{speaker}: {timestamp}')
             
             # creates df
             df = pd.DataFrame({'speaker': speaker_column, 
@@ -216,7 +221,7 @@ def predict_timestamp_and_remove(num_cut):
             # overwrites container
             with df_placeholder.container(): 
                 # Displays df
-                st.dataframe(df)
+                st.dataframe(df.tail(5))
 
             
         # If the speaker changes
@@ -244,8 +249,8 @@ def predict_timestamp_and_remove(num_cut):
                 
                 # displays image in sidebar
                 with image_placeholder.container(): 
-                    st.image(target_images[predicted_speaker], width = 100)
-                    st.write(speaker)
+                    st.image(target_images[predicted_speaker], width = 200)
+                    st.subheader(f'{speaker}: {timestamp}')
                 
                 df = pd.DataFrame({'speaker': speaker_column, 
                                    'start_time': start_time_column, 
@@ -256,7 +261,7 @@ def predict_timestamp_and_remove(num_cut):
                 # overwrites current container
                 with df_placeholder.container(): 
                     # Displays df
-                    st.dataframe(df)
+                    st.dataframe(df.tail(5))
 
                 # updates information
                 last_speaker = predicted_speaker
@@ -284,8 +289,8 @@ def predict_timestamp_and_remove(num_cut):
                 
                 # displays image in sidebar
                 with image_placeholder.container(): 
-                    st.image(target_images[predicted_speaker], width = 100)
-                    st.write(speaker)
+                    st.image(target_images[predicted_speaker], width = 200)
+                    st.subheader(f'{speaker}: {timestamp}')
                 
                 # creates data frame
                 df = pd.DataFrame({'speaker': speaker_column, 
@@ -297,7 +302,7 @@ def predict_timestamp_and_remove(num_cut):
                 # overwrites current container
                 with df_placeholder.container():
                     # Displays df
-                    st.dataframe(df)
+                    st.dataframe(df.tail(5))
                 
                 # updates information
                 last_speaker = predicted_speaker
